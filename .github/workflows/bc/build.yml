@@ -1,0 +1,147 @@
+name: Build APKs
+
+on:
+  workflow_dispatch:
+  #push:
+  #  branches: ["main"]
+  #  paths-ignore:
+  #    - "README.md"
+  #    - "fastlane/**"
+  #    - "assets/**"
+  #    - ".github/**/*.md"
+  #    - ".github/FUNDING.yml"
+  #    - ".github/ISSUE_TEMPLATE/**"
+
+permissions:
+  contents: write
+  discussions: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build_release:
+    name: Build Release (${{ matrix.variant }})
+    if: github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      matrix:
+        include:
+          - variant: gms
+            variantName: Gms
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Set Up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-cleanup: on-success
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build Release APK
+        run: ./gradlew --console=plain assemble${{ matrix.variantName }}Release --warning-mode summary
+        env:
+          METROLIST_APPLICATION_ID: com.zumanzoo.apps.zusic.test
+          METROLIST_APP_NAME: Zusic
+          PULL_REQUEST: "false"
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
+
+      - name: Sign APK
+        if: env.KEYSTORE_PRESENT == 'true'
+        env:
+          KEYSTORE_PRESENT: ${{ secrets.KEYSTORE != '' }}
+        uses: ilharp/sign-android-release@v2.0.0
+        with:
+          releaseDir: app/build/outputs/apk/${{ matrix.variant }}/release/
+          signingKey: ${{ secrets.KEYSTORE }}
+          keyAlias: ${{ secrets.KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+          buildToolsVersion: 35.0.0
+
+      - name: Move and Rename APK
+        run: |
+          OUTPUT_DIR="app/build/outputs/apk/${{ matrix.variant }}/release"
+          mkdir -p "$OUTPUT_DIR/out"
+          # Signed APK mile toh use karein, warna unsigned APK ko move karein
+          if find "$OUTPUT_DIR" -name "*-signed.apk" | grep -q .; then
+            find "$OUTPUT_DIR" -name "*-signed.apk" -o -name "*-unsigned-signed.apk" | xargs -I{} mv {} "$OUTPUT_DIR/out/app-${{ matrix.variant }}-release.apk"
+          else
+            find "$OUTPUT_DIR" -name "*.apk" | xargs -I{} mv {} "$OUTPUT_DIR/out/app-${{ matrix.variant }}-unsigned.apk"
+          fi
+
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ matrix.variant }}-release
+          path: app/build/outputs/apk/${{ matrix.variant }}/release/out/*
+
+  build_debug:
+    name: Build Debug (${{ matrix.variant }})
+    if: github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      matrix:
+        include:
+          - variant: gms
+            variantName: Gms
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Set Up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-cleanup: on-success
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Restore Persistent Keystore (Optional)
+        if: env.HAS_DEBUG_KEYSTORE == 'true'
+        env:
+          HAS_DEBUG_KEYSTORE: ${{ secrets.DEBUG_KEYSTORE != '' }}
+        run: |
+          echo "${{ secrets.DEBUG_KEYSTORE }}" | base64 -d > ./app/persistent-debug.keystore
+
+      - name: Build Debug APK
+        run: ./gradlew --console=plain assemble${{ matrix.variantName }}Debug --warning-mode summary
+        env:
+          METROLIST_APPLICATION_ID: com.zumanzoo.apps.zusic.test.debug
+          METROLIST_APP_NAME: Zusic Debug
+          PULL_REQUEST: "false"
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
+
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ matrix.variant }}-debug
+          path: app/build/outputs/apk/${{ matrix.variant }}/debug/*.apk
