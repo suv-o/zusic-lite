@@ -22,6 +22,13 @@ object TopDestinations {
             selectedIcon = Icons.Filled.Home
         ),
         TopDestination(
+            route = Routes.Search,
+            resourceId = R.string.search,
+            unselectedIcon = Icons.Outlined.Search,
+            selectedIcon = Icons.Filled.Search
+        ),
+        /*
+        TopDestination(
             route = Routes.Songs,
             resourceId = R.string.songs,
             unselectedIcon = Icons.Outlined.MusicNote,
@@ -39,6 +46,7 @@ object TopDestinations {
             unselectedIcon = Icons.Outlined.Album,
             selectedIcon = Icons.Filled.Album
         ),
+        */
         TopDestination(
             route = Routes.Playlists,
             resourceId = R.string.playlists,
