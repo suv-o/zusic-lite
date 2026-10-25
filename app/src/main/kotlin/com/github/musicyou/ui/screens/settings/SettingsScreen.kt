@@ -79,10 +79,11 @@ fun SettingsScreen(
                 .padding(paddingValues)
                 .padding(bottom = playerPadding)
         ) {
-            SettingsSection.entries
+            SettingsSection
+                .entries
                 .withIndex()
                 .filterNot { (_, section) ->
-                    section == SettingsSection.General || SettingsSection.Gestures || section == SettingsSection.Others
+                    section == SettingsSection.General || section == SettingsSection.Gestures || section == SettingsSection.Other
                 }
                 .forEach { (index, section) ->
                     ListItem(
@@ -97,7 +98,7 @@ fun SettingsScreen(
                             )
                         }
                     )
-            }
+                }
         }
     }
 }
