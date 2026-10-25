@@ -74,8 +74,8 @@ fun BottomNavigation(navController: NavHostController) {
                         )
                     } else {
                         Icon(
-                            requireNotNull(
-                                imageVector = if (selected) destination.selectedIcon!! else destination.unselectedIcon!!
+                            imageVector = requireNotNull(
+                                if (selected) destination.selectedIcon else destination.unselectedIcon
                             ),
                             contentDescription = stringResource(destination.resourceId)
                         )
