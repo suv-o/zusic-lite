@@ -25,9 +25,12 @@ object TopDestinations {
         ),
         TopDestination(
             route = Routes.Songs,
-            resourceId = R.string.songs,
-            unselectedIcon = Icons.Outlined.MusicNote,
-            selectedIcon = Icons.Filled.MusicNote
+            //resourceId = R.string.history,
+            resourceId = R.string.history,
+            //unselectedIcon = Icons.Outlined.MusicNote,
+            //selectedIcon = Icons.Filled.MusicNote
+            unselectedDrawable = R.drawable.history,
+            selectedDrawable = R.drawable.history
         ),
         /*
         TopDestination(

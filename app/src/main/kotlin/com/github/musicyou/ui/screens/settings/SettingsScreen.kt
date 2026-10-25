@@ -79,19 +79,24 @@ fun SettingsScreen(
                 .padding(paddingValues)
                 .padding(bottom = playerPadding)
         ) {
-            SettingsSection.entries.forEachIndexed { index, section ->
-                ListItem(
-                    headlineContent = {
-                        Text(text = stringResource(id = section.resourceId))
-                    },
-                    modifier = Modifier.clickable { onGoToSettingsPage(index) },
-                    leadingContent = {
-                        Icon(
-                            imageVector = section.icon,
-                            contentDescription = stringResource(id = section.resourceId)
-                        )
-                    }
-                )
+            SettingsSection.entries
+                .withIndex()
+                .filterNot { (_, section) ->
+                    section == SettingsSection.General || SettingsSection.Gestures || section == SettingsSection.Others
+                }
+                .forEach { (index, section) ->
+                    ListItem(
+                        headlineContent = {
+                            Text(text = stringResource(id = section.resourceId))
+                        },
+                        modifier = Modifier.clickable { onGoToSettingsPage(index) },
+                        leadingContent = {
+                            Icon(
+                                imageVector = section.icon,
+                                contentDescription = stringResource(id = section.resourceId)
+                            )
+                        }
+                    )
             }
         }
     }

@@ -124,14 +124,6 @@ fun HomePlaylists(
                     onClick = { onBuiltInPlaylist(BuiltInPlaylist.Offline.ordinal) }
                 )
             }
-
-            item(key = "new") {
-                BuiltInPlaylistItem(
-                    icon = Icons.Default.Add,
-                    name = stringResource(id = R.string.new_playlist),
-                    onClick = { isCreatingANewPlaylist = true }
-                )
-            }
             item(key = "artists") {
                 BuiltInPlaylistItem(
                     icon = Icons.Default.Person,
@@ -144,6 +136,14 @@ fun HomePlaylists(
                     icon = Icons.Default.Album,
                     name = stringResource(R.string.albums),
                     onClick = onAlbumsClick
+                )
+            }
+
+            item(key = "new") {
+                BuiltInPlaylistItem(
+                    icon = Icons.Default.Add,
+                    name = stringResource(id = R.string.new_playlist),
+                    onClick = { isCreatingANewPlaylist = true }
                 )
             }
 
