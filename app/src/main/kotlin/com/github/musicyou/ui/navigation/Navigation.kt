@@ -128,7 +128,6 @@ fun Navigation(
         playerComposable(route = Routes.Home::class) {
             QuickPicks(
                 openSearch = { navController.navigate(route = Routes.Search) },
-                openSongs = { navController.navigate(route = Routes.Songs) },
                 openSettings = { navController.navigate(route = Routes.Settings) },
                 onAlbumClick = navigateToAlbum,
                 onArtistClick = navigateToArtist,

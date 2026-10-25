@@ -11,7 +11,6 @@ import androidx.compose.material.icons.outlined.Album
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Search
 import com.github.musicyou.R
 
 object TopDestinations {
@@ -23,18 +22,12 @@ object TopDestinations {
             selectedIcon = Icons.Filled.Home
         ),
         TopDestination(
-            route = Routes.Search,
-            resourceId = R.string.search,
-            unselectedIcon = Icons.Outlined.Search,
-            selectedIcon = Icons.Outlined.Search
-        ),
-        /*
-        TopDestination(
             route = Routes.Songs,
             resourceId = R.string.songs,
             unselectedIcon = Icons.Outlined.MusicNote,
             selectedIcon = Icons.Filled.MusicNote
         ),
+        /*
         TopDestination(
             route = Routes.Artists,
             resourceId = R.string.artists,
@@ -55,6 +48,5 @@ object TopDestinations {
             selectedIcon = Icons.AutoMirrored.Filled.QueueMusic
         )
     )
-
     val routes = list.map { it.route }
 }
