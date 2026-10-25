@@ -6,30 +6,28 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
@@ -37,7 +35,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.github.musicyou.LocalPlayerPadding
 import com.github.musicyou.R
 
@@ -57,8 +54,8 @@ fun About() {
 
     val buildType = remember {
         if (
-            (context.applicationInfo.flags and
-                ApplicationInfo.FLAG_DEBUGGABLE) != 0
+            context.applicationInfo.flags and
+                ApplicationInfo.FLAG_DEBUGGABLE != 0
         ) {
             "debug"
         } else {
@@ -94,24 +91,24 @@ fun About() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
+
+                // App Icon
                 Surface(
-                    modifier = Modifier.size(88.dp),
-                    shape = RoundedCornerShape(28.dp),
+                    modifier = Modifier.size(76.dp),
+                    shape = RoundedCornerShape(24.dp),
                     color = Color.White
                 ) {
                     Box(
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            painter = painterResource(
-                                R.drawable.app_icon
-                            ),
+                            painter = painterResource(R.drawable.app_icon),
                             contentDescription = stringResource(
                                 R.string.app_name
                             ),
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(12.dp),
+                                .padding(10.dp),
                             tint = Color.Unspecified
                         )
                     }
@@ -149,7 +146,7 @@ fun About() {
                             )
                         }
 
-                        // App version
+                        // Version
                         Surface(
                             shape = RoundedCornerShape(14.dp),
                             color = badgeColor
@@ -175,10 +172,10 @@ fun About() {
                     )
                 }
 
-                // GitHub button
+                // GitHub Button
                 Surface(
                     modifier = Modifier
-                        .size(56.dp)
+                        .size(52.dp)
                         .clickable {
                             uriHandler.openUri(
                                 "https://github.com/suv-o/zusic-lite"
@@ -191,9 +188,7 @@ fun About() {
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            painter = painterResource(
-                                R.drawable.github
-                            ),
+                            painter = painterResource(R.drawable.github),
                             contentDescription = stringResource(
                                 R.string.github
                             ),
@@ -205,33 +200,74 @@ fun About() {
             }
         }
 
-        // Developer Card with overlapping GitHub avatar
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(320.dp)
+        // Developer Card
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // Background card
-            Surface(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(240.dp)
-                    .align(Alignment.BottomCenter),
-                shape = RoundedCornerShape(48.dp),
+                    .height(120.dp),
+                contentAlignment = Alignment.TopCenter
+            ) {
+
+                // Developer Card Background
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .align(Alignment.BottomCenter),
+                    shape = RoundedCornerShape(
+                        topStart = 40.dp,
+                        topEnd = 40.dp,
+                        bottomStart = 0.dp,
+                        bottomEnd = 0.dp
+                    ),
+                    color = cardColor
+                ) {}
+
+                // Person Icon
+                Surface(
+                    modifier = Modifier.size(120.dp),
+                    shape = CircleShape,
+                    color = colors.surface
+                ) {
+                    Box(
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Person,
+                            contentDescription = "Developer",
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(16.dp),
+                            tint = colors.onSurfaceVariant
+                        )
+                    }
+                }
+            }
+
+            // Developer Name and Role
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(
+                    bottomStart = 40.dp,
+                    bottomEnd = 40.dp
+                ),
                 color = cardColor
             ) {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .padding(
-                            top = 104.dp,
-                            bottom = 28.dp,
                             start = 16.dp,
-                            end = 16.dp
+                            end = 16.dp,
+                            top = 20.dp,
+                            bottom = 28.dp
                         ),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = "Subhajit Adhikary",
@@ -249,25 +285,6 @@ fun About() {
                     )
                 }
             }
-
-            // GitHub profile avatar
-            Surface(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .size(144.dp),
-                shape = CircleShape,
-                color = cardColor
-            ) {
-                AsyncImage(
-                    model = "https://github.com/suv-o.png",
-                    contentDescription = "Developer profile picture",
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(8.dp)
-                        .clip(CircleShape),
-                    contentScale = ContentScale.Crop
-                )
-            }
         }
 
         // Social Media Heading
@@ -282,13 +299,13 @@ fun About() {
         // Social Media Card
         Surface(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(48.dp),
+            shape = RoundedCornerShape(40.dp),
             color = cardColor
         ) {
             Column(
                 modifier = Modifier.padding(
-                    vertical = 16.dp,
-                    horizontal = 12.dp
+                    vertical = 12.dp,
+                    horizontal = 8.dp
                 )
             ) {
 
@@ -303,7 +320,7 @@ fun About() {
                     },
                     leadingContent = {
                         Surface(
-                            modifier = Modifier.size(64.dp),
+                            modifier = Modifier.size(56.dp),
                             shape = CircleShape,
                             color = badgeColor
                         ) {
@@ -311,11 +328,9 @@ fun About() {
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
-                                    painter = painterResource(
-                                        R.drawable.github
-                                    ),
+                                    painter = painterResource(R.drawable.github),
                                     contentDescription = null,
-                                    modifier = Modifier.size(32.dp),
+                                    modifier = Modifier.size(28.dp),
                                     tint = colors.onSecondaryContainer
                                 )
                             }
@@ -344,7 +359,7 @@ fun About() {
                     },
                     leadingContent = {
                         Surface(
-                            modifier = Modifier.size(64.dp),
+                            modifier = Modifier.size(56.dp),
                             shape = CircleShape,
                             color = badgeColor
                         ) {
@@ -356,7 +371,7 @@ fun About() {
                                         R.drawable.instagram
                                     ),
                                     contentDescription = null,
-                                    modifier = Modifier.size(32.dp),
+                                    modifier = Modifier.size(28.dp),
                                     tint = colors.onSecondaryContainer
                                 )
                             }
