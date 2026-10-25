@@ -11,6 +11,7 @@ import androidx.compose.material.icons.outlined.Album
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Search
 import com.github.musicyou.R
 
 object TopDestinations {

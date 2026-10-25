@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,7 +27,7 @@ fun HomeScaffold(
     snackbarHost: @Composable (() -> Unit) = {},
     floatingActionButton: @Composable (() -> Unit) = {},
     openSearch: () -> Unit,
-    openSongs: () -> Unit,
+    openSongs: () -> Unit = {},
     openSettings: () -> Unit,
     content: @Composable (() -> Unit)
 ) {
