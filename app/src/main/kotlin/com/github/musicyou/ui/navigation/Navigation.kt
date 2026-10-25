@@ -174,6 +174,12 @@ fun Navigation(
                 },
                 onPlaylistClick = { playlist ->
                     navController.navigate(route = Routes.LocalPlaylist(id = playlist.id))
+                },
+                onArtistsClick = {
+                    navController.navigate(route = Routes.Artists)
+                },
+                onAlbumsClick = {
+                    navController.navigate(route = Routes.Albums)
                 }
             )
         }

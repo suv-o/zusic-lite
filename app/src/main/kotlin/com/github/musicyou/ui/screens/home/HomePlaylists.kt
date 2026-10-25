@@ -9,8 +9,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Album
 import androidx.compose.material.icons.filled.DownloadForOffline
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -43,7 +45,9 @@ fun HomePlaylists(
     openSearch: () -> Unit,
     openSettings: () -> Unit,
     onBuiltInPlaylist: (Int) -> Unit,
-    onPlaylistClick: (Playlist) -> Unit
+    onPlaylistClick: (Playlist) -> Unit,
+    onArtistsClick: () -> Unit,
+    onAlbumsClick: () -> Unit
 ) {
     val playerPadding = LocalPlayerPadding.current
 
@@ -126,6 +130,20 @@ fun HomePlaylists(
                     icon = Icons.Default.Add,
                     name = stringResource(id = R.string.new_playlist),
                     onClick = { isCreatingANewPlaylist = true }
+                )
+            }
+            item(key = "artists") {
+                BuiltInPlaylistItem(
+                    icon = Icons.Default.Person,
+                    name = stringResource(R.string.artists),
+                    onClick = onArtistsClick
+                )
+            }
+            item(key = "albums") {
+                BuiltInPlaylistItem(
+                    icon = Icons.Default.Album,
+                    name = stringResource(R.string.albums),
+                    onClick = onAlbumsClick
                 )
             }
 

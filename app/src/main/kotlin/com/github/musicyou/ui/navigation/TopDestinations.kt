@@ -46,8 +46,10 @@ object TopDestinations {
         TopDestination(
             route = Routes.Playlists,
             resourceId = R.string.playlists,
-            unselectedIcon = Icons.AutoMirrored.Outlined.QueueMusic,
-            selectedIcon = Icons.AutoMirrored.Filled.QueueMusic
+            //unselectedIcon = Icons.AutoMirrored.Outlined.QueueMusic,
+            //selectedIcon = Icons.AutoMirrored.Filled.QueueMusic
+            unselectedDrawable = R.drawable.library_music_outlined,
+            selectedDrawable = R.drawable.library_music_filled
         )
     )
     val routes = list.map { it.route }
