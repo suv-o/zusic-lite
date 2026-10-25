@@ -15,10 +15,10 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.github.musicyou"
+        applicationId = "com.zumanzoo.apps.zusic.lite"
         minSdk = 24
-        versionCode = 17
-        versionName = "1.1.3"
+        versionCode = 1
+        versionName = "1.0.0"
     }
 
     splits {
