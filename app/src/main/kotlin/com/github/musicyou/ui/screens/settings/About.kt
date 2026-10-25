@@ -242,7 +242,7 @@ fun About() {
             Box(
                 modifier = Modifier
                     .size(160.dp)
-                    .background(color = avatarBorderColor, shape = CircleShape)
+                    .background(color = colors.surface, shape = CircleShape)
                     .padding(6.dp)
                     .clip(CircleShape)
                     .background(cardBgColor),

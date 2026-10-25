@@ -6,6 +6,7 @@ import android.content.ServiceConnection
 import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -86,7 +87,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
+        Toast.makeText(this, "by suv-o", Toast.LENGTH_LONG).show()
         val launchedFromNotification = intent?.extras?.getBoolean("expandPlayerBottomSheet") == true
         data = intent?.data ?: intent?.getStringExtra(Intent.EXTRA_TEXT)?.toUri()
 
