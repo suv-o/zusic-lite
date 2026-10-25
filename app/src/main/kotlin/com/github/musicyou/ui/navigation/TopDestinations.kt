@@ -26,7 +26,7 @@ object TopDestinations {
             route = Routes.Search,
             resourceId = R.string.search,
             unselectedIcon = Icons.Outlined.Search,
-            selectedIcon = Icons.Filled.Search
+            selectedIcon = Icons.Outlined.Search
         ),
         /*
         TopDestination(
