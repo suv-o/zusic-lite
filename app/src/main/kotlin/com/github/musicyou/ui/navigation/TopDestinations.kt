@@ -11,8 +11,6 @@ import androidx.compose.material.icons.outlined.Album
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import com.github.musicyou.R
 
 object TopDestinations {
@@ -22,8 +20,8 @@ object TopDestinations {
             resourceId = R.string.home,
             //unselectedIcon = Icons.Outlined.Home,
             //selectedIcon = Icons.Filled.Home
-            unselectedIcon = ImageVector.vectorResource(R.drawable.home_outlined),
-            selectedIcon = ImageVector.vectorResource(R.drawable.home_filled)
+            unselectedDrawable = R.drawable.home_outlined,
+            selectedDrawable = R.drawable.home_filled
         ),
         TopDestination(
             route = Routes.Songs,

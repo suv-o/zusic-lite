@@ -7,5 +7,7 @@ data class TopDestination<T : Any>(
     val route: T,
     @StringRes val resourceId: Int,
     val unselectedIcon: ImageVector,
-    val selectedIcon: ImageVector
+    val selectedIcon: ImageVector,
+    @DrawableRes val unselectedDrawable: Int? = null,
+    @DrawableRes val selectedDrawable: Int? = null
 )

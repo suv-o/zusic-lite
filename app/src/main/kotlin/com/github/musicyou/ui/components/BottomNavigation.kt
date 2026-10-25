@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -56,11 +57,27 @@ fun BottomNavigation(navController: NavHostController) {
                         }
                     }
                 },
+                /*
                 icon = {
                     Icon(
                         imageVector = if (selected) destination.selectedIcon else destination.unselectedIcon,
                         contentDescription = stringResource(id = destination.resourceId)
                     )
+                },
+                */
+                icon = {
+                    val drawable = if (selected) destination.selectedDrawable else destination.unselectedDrawable
+                    if (drawable != null) {
+                        Icon(
+                            painter = painterResource(drawable),
+                            contentDescription = stringResource(destination.resourceId)
+                        )
+                    } else {
+                        Icon(
+                            imageVector = if (selected) destination.selectedIcon!! else destination.unselectedIcon!!,
+                            contentDescription = stringResource(destination.resourceId)
+                        )
+                    }
                 },
                 label = {
                     if (navigationLabelsVisibility != NavigationLabelsVisibility.Hidden) {
