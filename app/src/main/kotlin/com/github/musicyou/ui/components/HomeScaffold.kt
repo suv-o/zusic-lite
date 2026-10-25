@@ -26,6 +26,7 @@ fun HomeScaffold(
     snackbarHost: @Composable (() -> Unit) = {},
     floatingActionButton: @Composable (() -> Unit) = {},
     openSearch: () -> Unit,
+    openSongs: () -> Unit,
     openSettings: () -> Unit,
     content: @Composable (() -> Unit)
 ) {
@@ -39,13 +40,20 @@ fun HomeScaffold(
                     Text(text = stringResource(id = title))
                 },
                 actions = {
+                    /*
                     TooltipIconButton(
                         description = R.string.search,
                         onClick = openSearch,
                         icon = Icons.Outlined.Search,
                         inTopBar = true
                     )
-
+                    */
+                    TooltipIconButton(
+                        description = R.string.songs,
+                        onClick = openSongs,
+                        icon = Icons.Outlined.MusicNote,
+                        inTopBar = true
+                    )
                     TooltipIconButton(
                         description = R.string.settings,
                         onClick = openSettings,

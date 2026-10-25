@@ -77,6 +77,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun QuickPicks(
     openSearch: () -> Unit,
+    openSongs: () -> Unit,
     openSettings: () -> Unit,
     onAlbumClick: (String) -> Unit,
     onArtistClick: (String) -> Unit,
@@ -105,6 +106,7 @@ fun QuickPicks(
     HomeScaffold(
         title = R.string.quick_picks,
         openSearch = openSearch,
+        openSongs = openSongs,
         openSettings = openSettings
     ) {
         BoxWithConstraints {
