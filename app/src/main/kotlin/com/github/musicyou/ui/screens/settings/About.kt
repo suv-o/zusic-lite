@@ -23,10 +23,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -49,6 +52,7 @@ private data class SocialLinkItem(
     val url: String
 )
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun About() {
     val context = LocalContext.current
@@ -76,6 +80,9 @@ fun About() {
     val appIconTintColor = if (isSystemDark) Color.Black else Color.White
     val cardBgColor = colors.surfaceVariant.copy(alpha = 0.5f)
     val badgeBgColor = colors.secondaryContainer.copy(alpha = 0.6f)
+
+    // Reference code wala exact Cookie9Sided shape
+    val developerShape = remember { MaterialShapes.Cookie9Sided.toShape() }
 
     val socialLinks = remember {
         listOf(
@@ -108,7 +115,6 @@ fun About() {
                     .padding(24.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // App Icon Surface
                 Surface(
                     shape = RoundedCornerShape(20.dp),
                     color = appIconBgColor,
@@ -128,7 +134,6 @@ fun About() {
 
                 Spacer(Modifier.width(20.dp))
 
-                // App Details
                 Column(
                     modifier = Modifier.weight(1f)
                 ) {
@@ -179,7 +184,6 @@ fun About() {
                     )
                 }
 
-                // GitHub Quick Action
                 Surface(
                     onClick = { uriHandler.openUri("https://github.com/suv-o/zusic-lite") },
                     shape = CircleShape,
@@ -200,12 +204,11 @@ fun About() {
 
         Spacer(Modifier.height(32.dp))
 
-        // 2. Overlapping Developer Card
+        // 2. Overlapping Developer Card (Cookie9Sided Polygon Shape)
         Box(
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.TopCenter
         ) {
-            // Background Card
             Card(
                 shape = RoundedCornerShape(32.dp),
                 colors = CardDefaults.cardColors(containerColor = cardBgColor),
@@ -237,21 +240,21 @@ fun About() {
                 }
             }
 
-            // Avatar Box (160dp with 6dp outer ring)
+            // Developer Avatar with Cookie9Sided outer ring and clip
             Box(
                 modifier = Modifier
                     .size(160.dp)
-                    .background(color = colors.surfaceVariant, shape = CircleShape)
+                    .background(color = colors.surfaceVariant, shape = developerShape)
                     .padding(6.dp)
-                    .clip(CircleShape)
-                    .background(colors.surface),
+                    .clip(developerShape)
+                    .background(appIconBgColor),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Filled.Person,
                     contentDescription = "Developer",
                     modifier = Modifier.size(72.dp),
-                    tint = colors.onSurfaceVariant
+                    tint = appIconTintColor
                 )
             }
         }
