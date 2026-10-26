@@ -48,7 +48,8 @@ object TopDestinations {
         */
         TopDestination(
             route = Routes.Playlists,
-            resourceId = R.string.playlists,
+            //resourceId = R.string.playlists,
+            resourceId = R.string.library,
             //unselectedIcon = Icons.AutoMirrored.Outlined.QueueMusic,
             //selectedIcon = Icons.AutoMirrored.Filled.QueueMusic
             unselectedDrawable = R.drawable.library_music_outlined,
