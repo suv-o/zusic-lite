@@ -60,15 +60,15 @@ jobs:
             --ks-key-alias "$KEY_ALIAS" \
             --ks-pass env:KEYSTORE_PASSWORD \
             --key-pass env:KEY_PASSWORD \
-            --out "$RUNNER_TEMP/MusicYou.apk" \
+            --out "$RUNNER_TEMP/Zusic-Lite.apk" \
             "$RUNNER_TEMP/aligned.apk"
 
-          "$BUILD_TOOLS/apksigner" verify --verbose "$RUNNER_TEMP/MusicYou.apk"
+          "$BUILD_TOOLS/apksigner" verify --verbose "$RUNNER_TEMP/Zusic-Lite.apk"
 
       - name: Upload Signed Release APK
         uses: actions/upload-artifact@v4
         with:
-          name: MusicYou-release-apk
-          path: ${{ runner.temp }}/MusicYou.apk
+          name: Zusic-Lite-release-apk
+          path: ${{ runner.temp }}/Zusic-Lite.apk
           if-no-files-found: error
           retention-days: 30
