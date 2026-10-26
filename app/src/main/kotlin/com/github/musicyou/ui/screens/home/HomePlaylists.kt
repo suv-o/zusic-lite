@@ -80,8 +80,8 @@ fun HomePlaylists(
     }
 
     HomeScaffold(
-        //title = R.string.playlists,
-        title = R.string.library,
+        title = R.string.playlists,
+        //title = R.string.library,
         openSearch = openSearch,
         openSettings = openSettings
     ) {

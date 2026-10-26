@@ -102,8 +102,8 @@ fun HomeSongs(
     }
 
     HomeScaffold(
-        //title = R.string.songs,
-        title = R.string.history,
+        title = R.string.songs,
+        //title = R.string.history,
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
         },
