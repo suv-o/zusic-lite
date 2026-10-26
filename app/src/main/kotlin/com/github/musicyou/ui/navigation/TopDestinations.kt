@@ -25,12 +25,12 @@ object TopDestinations {
         ),
         TopDestination(
             route = Routes.Songs,
+            resourceId = R.string.songs,
             //resourceId = R.string.history,
-            resourceId = R.string.history,
             //unselectedIcon = Icons.Outlined.MusicNote,
             //selectedIcon = Icons.Filled.MusicNote
-            unselectedDrawable = R.drawable.history,
-            selectedDrawable = R.drawable.history
+            unselectedDrawable = R.drawable.music_history,
+            selectedDrawable = R.drawable.music_history
         ),
         /*
         TopDestination(
@@ -48,8 +48,8 @@ object TopDestinations {
         */
         TopDestination(
             route = Routes.Playlists,
-            //resourceId = R.string.playlists,
-            resourceId = R.string.library,
+            resourceId = R.string.playlists,
+            //resourceId = R.string.library,
             //unselectedIcon = Icons.AutoMirrored.Outlined.QueueMusic,
             //selectedIcon = Icons.AutoMirrored.Filled.QueueMusic
             unselectedDrawable = R.drawable.library_music_outlined,
